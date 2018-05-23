@@ -1,0 +1,52 @@
+zuul:
+  routes:
+    biblioteca:
+      path: /biblioteca/**
+      serviceId: biblioteca
+    authorization-service:
+      sensitive-headers:
+      path: /uaa/**
+      service-id: SERVIDORAUTORIZACION
+      strip-prefix: false
+  add-proxy-headers: true
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:8080/uaa/oauth/token
+      userAuthorizationUri: http://localhost:8080/uaa/oauth/authorize
+      clientId: zuulApp
+      clientSecret: secretZuul
+    resource:
+      userInfoUri: http://localhost:8080/uaa/user
+      preferTokenInfo: false
+  sessions: ALWAYS
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8084/eureka/
+  instance:
+    hostname: localhost
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: zuul-service
+
+# Increase the Hystrix timeout to 60s (for all)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+logging:
+  level: 
+    org.springframework: debug
+    es.ejercicio.microservicios: debug
