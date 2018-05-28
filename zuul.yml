@@ -46,6 +46,10 @@ hystrix:
           thread:
             timeoutInMilliseconds: 60000
 
+ribbon:
+  ConnectTimeout: 60000
+  ReadTimeout: 60000
+   
 logging:
   level: 
     org.springframework: debug
