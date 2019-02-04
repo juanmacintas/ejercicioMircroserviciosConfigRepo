@@ -5,7 +5,7 @@ zuul:
       serviceId: biblioteca
     authorization-service:
       sensitive-headers:
-      path: /uaa/**
+      path: /oauth/**
       service-id: SERVIDORAUTORIZACION
       strip-prefix: false
   add-proxy-headers: true
